@@ -6,14 +6,13 @@ class ProductService{
 
   Future<List<ProductsModel>?> getData() async {
 
-    var client = http.Client();
     var uri = Uri.parse('https://my-json-server.typicode.com/kodplex/pr-re-ec-products/db');
-    var response = await client.get(uri);
+    var response = await http.get(uri);
+
     print(response.statusCode);
+    
     if (response.statusCode == 200) {
-      var ecommerce;
-      var data = json.decode(response.ecommerce);
-      print(data["name"]);
+      var data = jsonDecode(response.body);
       List<dynamic> product = List<ProductsModel>.from(data["products"].map());
     }else{
       print(response.statusCode);
