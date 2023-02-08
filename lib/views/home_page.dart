@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_store/services/get_products.dart';
-
+import 'package:grocery_store/services/get_ecommerce.dart';
+import '../models/Ecommerce.dart';
 import '../models/products.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<ProductsModel>? products;
   var isLoaded = false;
-
+  Ecommerce? ecommerce;
 
   @override
   void initState() {
@@ -23,7 +23,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   getData() async {
-    products = await ProductService().getData();
+    ecommerce = await ECommerceService().getData();
+    if(ecommerce!=null){
+      products= await ecommerce?.products;
+    }
+
     if(products !=null){
       setState(() {
         isLoaded = true;
