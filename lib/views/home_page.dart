@@ -46,9 +46,11 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (context, index) {
           return Container(
             child: Row(
-              children: [SizedBox(
+              children: [
+                SizedBox(
 
               ), Column(
+
               )
               ],
             ),
