@@ -10,10 +10,9 @@ class ECommerceService{
 
   Future<Ecommerce?> getData() async {
     var response = await fetchProducts();
-    print(response.body);
     if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      return Ecommerce.fromJson(response.body as Map<String, dynamic>);
+      Map<String, dynamic> data = jsonDecode(response.body);
+      return Ecommerce.fromJson(data['ecommerce']);
     }else{
       print(response.statusCode);
     }

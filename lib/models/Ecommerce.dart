@@ -16,8 +16,10 @@ class Ecommerce {
   });
 
   Ecommerce.fromJson(Map<String, dynamic> json) {
-    name = json["name"];
+    name = json['name'];
+    print(name);
     logo = json["logo"];
+    print(logo);
     currency = Currency.fromJson(json["currency"]);
     products = json["products"].map();
   }
