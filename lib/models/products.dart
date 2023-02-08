@@ -1,32 +1,32 @@
 class ProductsModel {
-  String? id;
-  String?name;
-  String? description;
-  int? price;
-  String? status;
-  int? rating;
-  int? ratedBy;
-  String? image;
+  String id;
+  String name;
+  String description;
+  int price;
+  String status;
+  int rating;
+  int ratedBy;
+  String image;
 
   ProductsModel({
-    this.id,
-    this.name,
-    this.description,
-    this.price,
-    this.status,
-    this.rating,
-    this.ratedBy,
-    this.image,
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.status,
+    required this.rating,
+    required this.ratedBy,
+    required this.image,
   });
 
-  ProductsModel.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    name = json["name"];
-    description = json["description"];
-    price = json["price"];
-    status = json["status"];
-    rating = json["rating"];
-    ratedBy = json["ratedBy"];
-    image = json["image"];
-  }
+  factory ProductsModel.fromJson(Map<String, dynamic> json) => ProductsModel(
+    id: json["id"],
+    name: json["name"],
+    description: json["description"],
+    price: json["price"],
+    status: json["status"],
+    rating: json["rating"],
+    ratedBy: json["ratedBy"],
+    image: json["image"].toString(),
+  );
 }

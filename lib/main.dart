@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const HomePage(title: 'Rest API Sterling BPO' ),
+      home: const HomePage(title: "Rest API Sterling BPO",),
     );
   }
 }

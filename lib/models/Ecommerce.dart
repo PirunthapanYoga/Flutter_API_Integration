@@ -12,15 +12,13 @@ class Ecommerce {
     this.name,
     this.logo,
     this.currency,
-    this.products,
+    this.products
   });
 
-  Ecommerce.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    print(name);
-    logo = json["logo"];
-    print(logo);
-    currency = Currency.fromJson(json["currency"]);
-    products = json["products"].map();
-  }
+  factory Ecommerce.fromJson(Map<String, dynamic> json) => Ecommerce(
+    name: json["name"],
+    logo: json["logo"],
+    currency: Currency.fromJson(json["currency"]),
+    products: List<ProductsModel>.from(json["products"].map((x) => ProductsModel.fromJson(x))),
+  );
 }

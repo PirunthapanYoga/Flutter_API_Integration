@@ -12,24 +12,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<ProductsModel>? products;
+  List<ProductsModel> products = <ProductsModel>[];
   var isLoaded = false;
-  Ecommerce? ecommerce;
+  Ecommerce? ecommerce = new Ecommerce();
 
-  @override
   void initState() {
     super.initState();
-    getData();
+    setState(() {
+      getData();
+    });
   }
 
   getData() async {
-    ecommerce = await ECommerceService().getData();
-    if(ecommerce!=null){
-      products= await ecommerce?.products;
-    }
-
-    if(products !=null){
+    final ecommerce = await ECommerceService().getData();
+    if (ecommerce != null) {
       setState(() {
+        products = ecommerce.products!;
         isLoaded = true;
       });
     }
@@ -46,20 +44,54 @@ class _HomePageState extends State<HomePage> {
       body: Visibility(
         visible: isLoaded,
         child: ListView.builder(
-          itemCount: products?.length,
+            itemCount: products.length,
             itemBuilder: (context, index) {
-          return Container(
-            child: Row(
-              children: [
-                SizedBox(
-
-              ), Column(
-
-              )
-              ],
-            ),
-          );
-        }),
+              return Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    child: Container(
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.30,
+                        width: MediaQuery.of(context).size.width * 0.30,
+                        child: Image.network(products[index].image),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    child: Center(
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.20,
+                        width: MediaQuery.of(context).size.width * 0.50,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Product Name : " + products[index].name,
+                              style: TextStyle(
+                                  fontSize: 15, fontFamily: "Times New Roman"),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              "Description : " + products[index].description,
+                              style: TextStyle(
+                                  fontSize: 15, fontFamily: "Times New Roman"),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              "Price : " + products[index].price.toString(),
+                              style: TextStyle(
+                                  fontSize: 15, fontFamily: "Times New Roman"),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              );
+            }),
         replacement: const Center(child: CircularProgressIndicator()),
       ),
     );
